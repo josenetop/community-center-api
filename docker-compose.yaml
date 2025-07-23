@@ -6,17 +6,27 @@ services:
     container_name: mongodb_community_center
     ports:
       - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: rootpassword
     volumes:
       - mongodb_data:/data/db
 
+#  community-center-api:
+#    image: josenetop/community-center-api:latest
+#
+#    container_name: community_center_api_app
+#    ports:
+#      - "7777:8080"
+#    depends_on:
+#      - mongodb
   community-center-api:
-    image: josenetop/community-center-api:latest
-
+    build:
+      context: .
+      dockerfile: Dockerfile
     container_name: community_center_api_app
     ports:
       - "7777:8080"
-    depends_on:
-      - mongodb
 
 volumes:
   mongodb_data:
