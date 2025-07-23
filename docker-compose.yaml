@@ -1,24 +1,22 @@
 version: '3.9'
 
 services:
-  mongo:
+  mongodb:
     image: mongo:latest
-    container_name: mongo
+    container_name: mongodb_community_center
     ports:
       - "27017:27017"
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: rootpassword
     volumes:
-      - mongo-data:/data/db
+      - mongodb_data:/data/db
 
   community-center-api:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: josenetop/community-center-api:latest
+
     container_name: community_center_api_app
     ports:
       - "7777:8080"
+    depends_on:
+      - mongodb
 
 volumes:
-  mongo-data:
+  mongodb_data:
