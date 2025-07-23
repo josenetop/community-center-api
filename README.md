@@ -53,7 +53,7 @@ Notificações em tempo real são enviadas via nosso canal Discord:
 ## 🛠️ Tecnologias Utilizadas
 
 - ✅ Kotlin 1.9
-- ✅ Spring Boot 3.3
+- ✅ Spring Boot 3
 - ✅ MongoDB
 - ✅ Docker + Docker Compose
 - ✅ Swagger/OpenAPI (via SpringDoc)
