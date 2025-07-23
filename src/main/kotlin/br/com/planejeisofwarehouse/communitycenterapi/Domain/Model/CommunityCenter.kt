@@ -10,23 +10,23 @@ data class CommunityCenter(
     @Id
     val id: UUID = UUID.randomUUID(),
     val name: String,
-    val andrees: String,
+    val address: String? = null,
     val latitude: Double,
     val longitude: Double,
-    var maxCapacity: Int,
+    var maxCapacity: Int?,
     var currentOccupation: Int,
     var resources: MutableList<Resource> = mutableListOf(),
     var createdAt: LocalDateTime = LocalDateTime.now(),
     var updatedAt: LocalDateTime? = null
 ) {
     init {
-        require(maxCapacity >= 0) { "Capacidade máxima não pode ser nagativa" }
+        maxCapacity?.let { require(it >= 0) { "Capacidade máxima não pode ser nagativa" } }
         require(currentOccupation >= 0 ) { "Ocupação não atual não pode ser negativa" }
-        require(currentOccupation <= maxCapacity) { "Ocupação atual não pode ser maior que a capacidade  máxima" }
+        maxCapacity?.let { require(currentOccupation <= it) { "Ocupação atual não pode ser maior que a capacidade máxima" } }
     }
 
 //    Verifica se a ocupação do centro é maior que 90%
     fun isOccupancyHigh(): Boolean {
-        return currentOccupation.toDouble() / maxCapacity > 0.90
+        return maxCapacity?.let { currentOccupation.toDouble() / it }!! > 0.90
     }
 }

@@ -6,7 +6,4 @@ data class Resource(
     val type: ResourceType,
     var quantity: Int
 ) {
-    fun calculatePoints(): Int {
-        return type.points * quantity
-    }
 }
